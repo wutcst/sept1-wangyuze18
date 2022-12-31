@@ -10,7 +10,7 @@ public class Room
 
     /**
      * 创建房间并初始化其位置描述和出口
-     * @param description 房间未知的描述
+     * @param description 房间位置的描述
      */
     public Room(String description)
     {
