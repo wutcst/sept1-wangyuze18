@@ -20,7 +20,7 @@ public class Room
 
     /**
      * 设置出口的方向和对应的相邻房间
-     * @param direction 出口反向
+     * @param direction 出口方向
      * @param neighbor 出口方向所对应的相邻房间
      */
     public void setExit(String direction, Room neighbor)
@@ -38,7 +38,7 @@ public class Room
     }
 
     /**
-     * 得到房间的位置描述和其开放的出口方向
+     * 得到房间的位置描述及其开放的出口方向
      * @return 房间的详细描述字符串
      */
     public String getLongDescription()
@@ -48,7 +48,7 @@ public class Room
 
     /**
      * 得到所有开放的出口方向
-     * @return 出口方向拼接的字符串
+     * @return 所有出口方向拼接的字符串
      */
     private String getExitString()
     {
@@ -63,7 +63,7 @@ public class Room
     /**
      * 得到对应出口方向的房间
      * @param direction 出口方向
-     * @return 出口方向所对应的房间类
+     * @return 出口方向所连接的房间类
      */
     public Room getExit(String direction)
     {
