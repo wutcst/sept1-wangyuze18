@@ -7,12 +7,20 @@ public class Parser
     private CommandWords commands;
     private Scanner reader;
 
+    /**
+     * 创建指令解析器并初始化有效指令类和输入流
+     */
     public Parser()
     {
         commands = new CommandWords();
         reader = new Scanner(System.in);
     }
 
+    /**
+     * 获取指令，通过命令行读取用户输入的单词，如果只有一个单词，则secondWord赋值为null，停止读入，如果有两个单词，则继续读入下一个。
+     * 最后进行指令有效性验证，如果第一个单词为有效指令，则commonWord赋值为此单词，否则commonWord为null，最终包装返回Command类
+     * @return 命令类，用于说明下一步的操作
+     */
     public Command getCommand()
     {
         String inputLine;
@@ -39,6 +47,9 @@ public class Parser
         }
     }
 
+    /**
+     * 展示输出所有有效指令
+     */
     public void showCommands()
     {
         commands.showAll();
