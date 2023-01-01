@@ -65,10 +65,10 @@ public class Room
                 details="there is 1 item in the room\n";
             }
             else{
-                details="there are "+cnt+"items in the room\n";
+                details="there are "+cnt+" items in the room\n";
             }
             for(Item item:items){
-                details="you find"+item.getDescription()+",which weights "+item.getWeight()+" g\n";
+                details+="you find one "+item.getDescription()+",which weights "+item.getWeight()+" g\n";
             }
         }
         return details;

@@ -30,6 +30,7 @@ public class Game
     /**
      * 创建所有房间对象并连接其出口用以构建迷宫.
      */
+
     private void createRooms()
     {
         Room outside, theater, pub, lab, office;
@@ -54,6 +55,10 @@ public class Game
         lab.setExit("east", office);
 
         office.setExit("west", lab);
+
+        //initialise room items
+        theater.addItem("popcorn",300);
+        theater.addItem("coke",200);
 
         currentRoom = outside;  // start game outside
     }
@@ -199,6 +204,7 @@ public class Game
      * 展示当前房间信息和房间内所有物品信息
      */
     private void printRoomDetails(){
-
+        System.out.println("you are "+currentRoom.getShortDescription());
+        System.out.println(currentRoom.getAllItemDescription());
     }
 }
