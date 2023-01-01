@@ -104,15 +104,37 @@ public class Game
         }
 
         String commandWord = command.getCommandWord();
-        if (commandWord.equals("help")) {
-            printHelp();
+        switch (commandWord){
+            case "help":{
+                printHelp();
+                break;
+            }
+            case "go":{
+                goRoom(command);
+                break;
+            }
+            case "quit":{
+                wantToQuit =quit(command);
+                break;
+            }
+            case "look":{
+                printRoomDetails();
+                break;
+            }
+            default:{
+                break;
+            }
         }
-        else if (commandWord.equals("go")) {
-            goRoom(command);
-        }
-        else if (commandWord.equals("quit")) {
-            wantToQuit = quit(command);
-        }
+//        if (commandWord.equals("help")) {
+//            printHelp();
+//        }
+//        else if (commandWord.equals("go")) {
+//            goRoom(command);
+//        }
+//        else if (commandWord.equals("quit")) {
+//            wantToQuit = quit(command);
+//        }
+
         // else command not recognised.
         return wantToQuit;
     }
@@ -171,5 +193,12 @@ public class Game
         else {
             return true;  // signal that we want to quit
         }
+    }
+
+    /**
+     * 展示当前房间信息和房间内所有物品信息
+     */
+    private void printRoomDetails(){
+
     }
 }
