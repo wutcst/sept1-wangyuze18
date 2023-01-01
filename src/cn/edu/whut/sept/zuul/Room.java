@@ -1,5 +1,7 @@
 package cn.edu.whut.sept.zuul;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.HashMap;
 
@@ -7,6 +9,7 @@ public class Room
 {
     private String description;
     private HashMap<String, Room> exits;
+    private List<Item> items;
 
     /**
      * 创建房间并初始化其位置描述和出口
@@ -16,6 +19,7 @@ public class Room
     {
         this.description = description;
         exits = new HashMap<>();
+        items = new ArrayList<>();
     }
 
     /**
@@ -44,6 +48,30 @@ public class Room
     public String getLongDescription()
     {
         return "You are " + description + ".\n" + getExitString();
+    }
+
+    public void addItem(String description,int weight){
+        items.add(new Item(description,weight));
+    }
+
+    public String getAllItemDescription(){
+        String details=null;
+        if(items.isEmpty()){
+            details="The room is empty";
+        }
+        else{
+            int cnt= items.size();
+            if(cnt==1){
+                details="there is 1 item in the room\n";
+            }
+            else{
+                details="there are "+cnt+"items in the room\n";
+            }
+            for(Item item:items){
+                details="you find"+item.getDescription()+",which weights "+item.getWeight()+" g\n";
+            }
+        }
+        return details;
     }
 
     /**
