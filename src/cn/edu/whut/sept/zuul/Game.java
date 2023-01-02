@@ -13,16 +13,20 @@
  */
 package cn.edu.whut.sept.zuul;
 
+import java.util.LinkedList;
+
 public class Game
 {
     private Parser parser;
     private Room currentRoom;
+    private LinkedList<Room> records;
 
     /**
      * 创建游戏并初始化内部数据和解析器.
      */
     public Game()
     {
+        records = new LinkedList<>();
         createRooms();
         parser = new Parser();
     }
@@ -61,6 +65,7 @@ public class Game
         theater.addItem("coke",200);
 
         currentRoom = outside;  // start game outside
+        push();
     }
 
     /**
@@ -126,6 +131,10 @@ public class Game
                 printRoomDetails();
                 break;
             }
+            case "back":{
+                goBack(command);
+                break;
+            }
             default:{
                 break;
             }
@@ -181,6 +190,7 @@ public class Game
         }
         else {
             currentRoom = nextRoom;
+            push();
             System.out.println(currentRoom.getLongDescription());
         }
     }
@@ -206,5 +216,29 @@ public class Game
     private void printRoomDetails(){
         System.out.println("you are "+currentRoom.getShortDescription());
         System.out.println(currentRoom.getAllItemDescription());
+    }
+
+    /**
+     * 添加房间到历史记录
+     */
+    private void push(){
+        records.addLast(currentRoom);
+    }
+
+    /**
+     * 执行back指令,可以指定返回的层数,直至返回到起点,默认返回层数为一层，即上一层。
+     * @param command
+     */
+    private void goBack(Command command){
+        int num=1;
+        if(command.hasSecondWord()){
+            num=Integer.valueOf(command.getSecondWord());
+        }
+        while(num>0 && records.size()>1){
+            records.pollLast();
+            num--;
+        }
+        currentRoom=records.getLast();
+        System.out.println(currentRoom.getLongDescription());
     }
 }

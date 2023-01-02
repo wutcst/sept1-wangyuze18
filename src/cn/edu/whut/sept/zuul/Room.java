@@ -9,7 +9,7 @@ public class Room
 {
     private String description;
     private HashMap<String, Room> exits;
-    private List<Item> items;
+    private HashMap<String,Item> items;
 
     /**
      * 创建房间并初始化其位置描述和出口
@@ -19,7 +19,7 @@ public class Room
     {
         this.description = description;
         exits = new HashMap<>();
-        items = new ArrayList<>();
+        items = new HashMap<>();
     }
 
     /**
@@ -51,7 +51,11 @@ public class Room
     }
 
     public void addItem(String description,int weight){
-        items.add(new Item(description,weight));
+        items.put(description,new Item(description,weight));
+    }
+
+    public void removeItem(String description){
+        items.remove(description);
     }
 
     public String getAllItemDescription(){
@@ -67,8 +71,8 @@ public class Room
             else{
                 details="there are "+cnt+" items in the room\n";
             }
-            for(Item item:items){
-                details+="you find one "+item.getDescription()+",which weights "+item.getWeight()+" g\n";
+            for(Item item:items.values()){
+                details+=item.getDescription()+",which weights "+item.getWeight()+" g\n";
             }
         }
         return details;
