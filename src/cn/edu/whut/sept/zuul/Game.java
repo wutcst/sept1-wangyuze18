@@ -190,6 +190,9 @@ public class Game
             System.out.println("There is no door!");
         }
         else {
+            if(nextRoom instanceof TransferRoom) {
+                nextRoom=transfer(nextRoom);
+            }
             currentRoom = nextRoom;
             push();
             System.out.println(currentRoom.getLongDescription());
@@ -241,5 +244,16 @@ public class Game
         }
         currentRoom=records.getLast();
         System.out.println(currentRoom.getLongDescription());
+    }
+
+    /**
+     * 进入传送房将随机传送到另一个房间
+     * @return
+     */
+    public Room transfer(Room room){
+        System.out.println("you are "+room.getShortDescription());
+        System.out.println("transfer......");
+        room=((TransferRoom)room).transferToRoom();
+        return room;
     }
 }

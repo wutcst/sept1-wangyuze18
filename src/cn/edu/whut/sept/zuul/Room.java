@@ -1,9 +1,6 @@
 package cn.edu.whut.sept.zuul;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.HashMap;
+import java.util.*;
 
 public class Room
 {
@@ -100,6 +97,19 @@ public class Room
     public Room getExit(String direction)
     {
         return exits.get(direction);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Room)) return false;
+        Room room = (Room) o;
+        return Objects.equals(description, room.description) && Objects.equals(exits, room.exits) && Objects.equals(items, room.items);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(description, exits, items);
     }
 }
 

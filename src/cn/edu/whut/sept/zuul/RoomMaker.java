@@ -53,7 +53,7 @@ public class RoomMaker {
         lab.setExit("east", office);
 
         office.setExit("west", lab);
-
+        office.setExit("south",transferRoom1);
         //initialise room items
         theater.addItem("popcorn",300);
         theater.addItem("coke",200);
@@ -77,7 +77,8 @@ public class RoomMaker {
      */
     public static Room getRandomRoom(){
         int chooseNum=(int)(Math.random()*rooms.size());
-        return rooms.get(chooseNum);
+        if(chooseNum==rooms.size()) --chooseNum;
+        return roomList.get(chooseNum);
     }
 
 }
