@@ -19,7 +19,7 @@ public class RoomMaker {
      * @return 起始房间
      */
     public static Room createRoom(){
-        Room outside, theater, pub, lab, office;
+        Room outside, theater, pub, lab, office,transferRoom1;
 
         // create the rooms
         outside = new Room("outside the main entrance of the university");
@@ -27,6 +27,7 @@ public class RoomMaker {
         pub = new Room("in the campus pub");
         lab = new Room("in a computing lab");
         office = new Room("in the computing admin office");
+        transferRoom1=new TransferRoom("in the transfer room 1");
 
         //initialise rooms
         rooms.put("outside",outside);
@@ -34,6 +35,7 @@ public class RoomMaker {
         rooms.put("campus pub",pub);
         rooms.put("computing lab",lab);
         rooms.put("computing admin office",office);
+        rooms.put("transfer room 1",transferRoom1);
 
         //initialise roomList
         roomList.addAll(rooms.values());
