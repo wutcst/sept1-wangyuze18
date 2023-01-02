@@ -1,6 +1,7 @@
 package cn.edu.whut.sept.zuul;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -9,13 +10,13 @@ import java.util.List;
  * @Description: 玩家类
  */
 public class Player {
-    String name;
-    List<Item> items;
-    int strength=1000;
-    Room currentRoom;
+    private String name;
+    private HashMap<String,Item> items;
+    private int strength=1000;
+    private Room currentRoom;
     public Player(String name){
         this.name=name;
-        items=new ArrayList<>();
+        items=new HashMap<>();
     }
     public Player(String name,int strength){
         this(name);
@@ -31,12 +32,8 @@ public class Player {
         this.name = name;
     }
 
-    public List<Item> getItems() {
-        return items;
-    }
+    public void getAllItems(){
 
-    public void setItems(List<Item> items) {
-        this.items = items;
     }
 
     public int getStrength() {
