@@ -12,6 +12,7 @@ public class Player {
     String name;
     List<Item> items;
     int strength=1000;
+    Room currentRoom;
     public Player(String name){
         this.name=name;
         items=new ArrayList<>();
@@ -22,4 +23,35 @@ public class Player {
     }
 
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
+    }
+
+    public int getStrength() {
+        return strength;
+    }
+
+    public void setStrength(int strength) {
+        this.strength = strength;
+    }
+
+    public Room getCurrentRoom() {
+        return currentRoom;
+    }
+
+    public void setCurrentRoom(Room currentRoom) {
+        this.currentRoom = currentRoom;
+    }
 }
