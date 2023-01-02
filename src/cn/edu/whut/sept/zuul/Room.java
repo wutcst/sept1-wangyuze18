@@ -55,26 +55,9 @@ public class Room
         items.remove(description);
     }
 
-    public String getAllItemDescription(){
-        String details=null;
-        if(items.isEmpty()){
-            details="The room is empty";
-        }
-        else{
-            int cnt= items.size();
-            if(cnt==1){
-                details="there is 1 item in the room\n";
-            }
-            else{
-                details="there are "+cnt+" items in the room\n";
-            }
-            for(Item item:items.values()){
-                details+=item.getDescription()+",which weights "+item.getWeight()+" g\n";
-            }
-        }
-        return details;
+    public List<Item> getAllItems(){
+        return new ArrayList<>(items.values());
     }
-
     /**
      * 得到所有开放的出口方向
      * @return 所有出口方向拼接的字符串

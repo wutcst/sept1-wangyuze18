@@ -14,12 +14,13 @@
 package cn.edu.whut.sept.zuul;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class Game
 {
     private Parser parser;
-    private Room currentRoom;
     private LinkedList<Room> records;
+    private Player player;
 
     /**
      * 创建游戏并初始化内部数据和解析器.
@@ -28,7 +29,7 @@ public class Game
     {
         records = new LinkedList<>();
         parser = new Parser();
-        currentRoom=RoomMaker.createRoom();
+        player=new Player("WangYuze",500);
         push();
     }
 
@@ -97,7 +98,7 @@ public class Game
         System.out.println("World of Zuul is a new, incredibly boring adventure game.");
         System.out.println("Type 'help' if you need help.");
         System.out.println();
-        System.out.println(currentRoom.getLongDescription());
+        System.out.println(player.getCurrentRoom().getLongDescription());
     }
 
     /**
@@ -183,6 +184,7 @@ public class Game
 
         String direction = command.getSecondWord();
 
+        Room currentRoom= player.getCurrentRoom();
         // Try to leave current room.
         Room nextRoom = currentRoom.getExit(direction);
 
@@ -218,15 +220,35 @@ public class Game
      * 展示当前房间信息和房间内所有物品信息
      */
     private void printRoomDetails(){
+        Room currentRoom= player.getCurrentRoom();
         System.out.println("you are "+currentRoom.getShortDescription());
-        System.out.println(currentRoom.getAllItemDescription());
+        List<Item> items=currentRoom.getAllItems();
+        String details="";
+        int totalWeight=0;
+        if(items.isEmpty()){
+            details="The room is empty";
+        }
+        else{
+            int cnt= items.size();
+            if(cnt==1){
+                details="there is 1 item in the room\n";
+            }
+            else{
+                details="there are "+cnt+" items in the room\n";
+            }
+            for(Item item:items){
+                details+=item.getDescription()+",which weights "+item.getWeight()+" g\n";
+            }
+        }
+        details+="the total weight is "+totalWeight+"g\n";
+        System.out.println(details);
     }
 
     /**
      * 添加房间到历史记录
      */
     private void push(){
-        records.addLast(currentRoom);
+        records.addLast(player.getCurrentRoom());
     }
 
     /**
@@ -242,6 +264,7 @@ public class Game
             records.pollLast();
             num--;
         }
+        Room currentRoom= player.getCurrentRoom();
         currentRoom=records.getLast();
         System.out.println(currentRoom.getLongDescription());
     }
@@ -256,4 +279,6 @@ public class Game
         room=((TransferRoom)room).transferToRoom();
         return room;
     }
+
+
 }
