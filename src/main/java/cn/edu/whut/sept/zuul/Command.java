@@ -1,7 +1,6 @@
 package cn.edu.whut.sept.zuul;
 
-public class Command
-{
+public class Command {
     private String commandWord;
     private String secondWord;
 

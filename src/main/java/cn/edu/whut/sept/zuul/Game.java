@@ -271,7 +271,7 @@ public class Game
     /**
      * 展示玩家背包所有物品以及重量
      */
-    public void printPlayerDetails(){
+    private void printPlayerDetails(){
         List<Item> items=player.getAllItems();
         String details="";
         if(items.isEmpty()){
@@ -320,7 +320,7 @@ public class Game
      * 进入传送房将随机传送到另一个房间
      * @return
      */
-    public Room transfer(Room room){
+    private Room transfer(Room room){
         System.out.println("you are "+room.getShortDescription());
         System.out.println("transfer......");
         room=((TransferRoom)room).transferToRoom();
@@ -330,7 +330,7 @@ public class Game
     /**
      * 执行take指令，输入物品名拾取物品，如果拾取物品超过上限值，则无法拾取
      */
-    public void take(Command command){
+    private void take(Command command){
         if(!command.hasSecondWord()){
             System.out.println("take what?");
             return;
@@ -355,7 +355,7 @@ public class Game
     /**
      * 执行drop指令，玩家将丢下对应物品在房间中
      */
-    public void drop(Command command){
+    private void drop(Command command){
         if(!command.hasSecondWord()){
             System.out.println("drop what?");
             return;
@@ -375,7 +375,7 @@ public class Game
     /**
      * 执行eat cookie指令，如果背包中有magic cookie，则执行成功，否则执行失败
      */
-    public void eat(Command command){
+    private void eat(Command command){
         if(!command.hasSecondWord()){
             System.out.println("eat what?");
             return;
