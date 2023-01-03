@@ -48,6 +48,7 @@ public class RoomMaker {
         theater.setExit("west", outside);
 
         pub.setExit("east", outside);
+        pub.addItem(new MagicCookie("magicCookie",0));
 
         lab.setExit("north", outside);
         lab.setExit("east", office);
@@ -57,6 +58,7 @@ public class RoomMaker {
         //initialise room items
         theater.addItem("popcorn",300);
         theater.addItem("coke",200);
+
 
 
         return outside;  // start game outside

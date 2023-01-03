@@ -150,8 +150,8 @@ public class Game
                 printAllDetails();
                 break;
             }
-            case "eat cookie":{
-                eat();
+            case "eat":{
+                eat(command);
                 break;
             }
             default:{
@@ -372,10 +372,21 @@ public class Game
         }
     }
 
-    public void eat(){
-        Item item=player.getItem("magic cookie");
+    /**
+     * 执行eat cookie指令，如果背包中有magic cookie，则执行成功，否则执行失败
+     */
+    public void eat(Command command){
+        if(!command.hasSecondWord()){
+            System.out.println("eat what?");
+            return;
+        }
+        if(!command.getSecondWord().equals("cookie")){
+            System.out.println("I don't know what you mean...");
+            return;
+        }
+        Item item=player.getItem("magicCookie");
         if(item==null){
-            System.out.println("there is no magic cookie in the backpack !");
+            System.out.println("there is no magicCookie in the backpack !");
         }
         else{
             int inc=((MagicCookie)item).getEnergy();
