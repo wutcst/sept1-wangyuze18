@@ -3,7 +3,7 @@ package cn.edu.whut.sept.zuul;
 public class CommandWords
 {
     private static final String[] validCommands = {
-            "go", "quit", "help","look","back"
+            "go", "quit", "help","look","back","take","drop","items","eat cookie"
     };
 
     /**

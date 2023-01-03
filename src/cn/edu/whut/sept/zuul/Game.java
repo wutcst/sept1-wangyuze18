@@ -30,6 +30,7 @@ public class Game
         records = new LinkedList<>();
         parser = new Parser();
         player=new Player("WangYuze",500);
+        player.setCurrentRoom(RoomMaker.createRoom());
         push();
     }
 
@@ -237,10 +238,10 @@ public class Game
                 details="there are "+cnt+" items in the room\n";
             }
             for(Item item:items){
-                details+=item.getDescription()+",which weights "+item.getWeight()+" g\n";
+                details+=item.getDescription()+",which weights "+item.getWeight()+"\n";
             }
         }
-        details+="the total weight is "+totalWeight+"g\n";
+        details+="the total weight is "+totalWeight+"\n";
         System.out.println(details);
     }
 
@@ -280,5 +281,47 @@ public class Game
         return room;
     }
 
+    /**
+     * 执行take指令，输入物品名拾取物品，如果拾取物品超过上限值，则无法拾取
+     */
+    public void take(Command command){
+        if(!command.hasSecondWord()){
+            System.out.println("take what?");
+            return;
+        }
+        Room currentRoom= player.getCurrentRoom();
+        Item item=currentRoom.getItem(command.getSecondWord());
+        if(item==null){
+            System.out.println("There is no "+command.getCommandWord()+" in the room !");
+        }
+        else{
+            if(item.getWeight()>player.getCapacity()){
+                System.out.println("Your backpack is full !");
+            }
+            else{
+                System.out.println("You take the"+item.getDescription()+"into the backpack successfully");
+                player.addItem(item);
+                currentRoom.removeItem(item.getDescription());
+            }
+        }
+    }
 
+    /**
+     * 执行drop指令，玩家将丢下对应物品在房间中
+     */
+    public void drop(Command command){
+        if(!command.hasSecondWord()){
+            System.out.println("drop what?");
+            return;
+        }
+        Room currentRoom= player.getCurrentRoom();
+        Item item= player.getItem(command.getSecondWord());
+        if(item==null){
+            System.out.println("there is no "+command.getSecondWord()+" in your backpack !");
+        }
+        else{
+            player.removeItem(item.getDescription());
+            currentRoom.addItem(item);
+        }
+    }
 }

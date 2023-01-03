@@ -51,6 +51,8 @@ public class Room
         items.put(description,new Item(description,weight));
     }
 
+    public void addItem(Item item){items.put(item.getDescription(),item);}
+
     public void removeItem(String description){
         items.remove(description);
     }
@@ -58,6 +60,11 @@ public class Room
     public List<Item> getAllItems(){
         return new ArrayList<>(items.values());
     }
+
+    public Item getItem(String description){
+        return items.get(description);
+    }
+
     /**
      * 得到所有开放的出口方向
      * @return 所有出口方向拼接的字符串

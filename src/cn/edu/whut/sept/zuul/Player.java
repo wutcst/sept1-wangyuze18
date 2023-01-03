@@ -12,15 +12,15 @@ import java.util.List;
 public class Player {
     private String name;
     private HashMap<String,Item> items;
-    private int strength=1000;
+    private int capacity=1000;
     private Room currentRoom;
     public Player(String name){
         this.name=name;
         items=new HashMap<>();
     }
-    public Player(String name,int strength){
+    public Player(String name,int capacity){
         this(name);
-        this.strength=strength;
+        this.capacity=capacity;
     }
 
 
@@ -32,16 +32,30 @@ public class Player {
         this.name = name;
     }
 
-    public void getAllItems(){
-
+    public List<Item> getAllItems(){
+        return new ArrayList<>(items.values());
     }
 
-    public int getStrength() {
-        return strength;
+    public void addItem(Item item){
+        this.capacity-=item.getWeight();
+        items.put(item.getDescription(),item);
     }
 
-    public void setStrength(int strength) {
-        this.strength = strength;
+    public void removeItem(String description){
+        this.capacity+=items.get(description).getWeight();
+        items.remove(description);
+    }
+
+    public Item getItem(String item){
+        return items.get(item);
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 
     public Room getCurrentRoom() {
