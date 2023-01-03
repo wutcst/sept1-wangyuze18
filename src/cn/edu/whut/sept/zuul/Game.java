@@ -138,6 +138,18 @@ public class Game
                 goBack(command);
                 break;
             }
+            case "take":{
+                take(command);
+                break;
+            }
+            case "drop":{
+                drop(command);
+                break;
+            }
+            case "items":{
+                printAllDetails();
+                break;
+            }
             default:{
                 break;
             }
@@ -197,6 +209,7 @@ public class Game
                 nextRoom=transfer(nextRoom);
             }
             currentRoom = nextRoom;
+            player.setCurrentRoom(currentRoom);
             push();
             System.out.println(currentRoom.getLongDescription());
         }
@@ -216,6 +229,11 @@ public class Game
             return true;  // signal that we want to quit
         }
     }
+    private void printAllDetails(){
+        printRoomDetails();
+        System.out.println();
+        printPlayerDetails();
+    }
 
     /**
      * 展示当前房间信息和房间内所有物品信息
@@ -227,7 +245,7 @@ public class Game
         String details="";
         int totalWeight=0;
         if(items.isEmpty()){
-            details="The room is empty";
+            details="The room is empty\n";
         }
         else{
             int cnt= items.size();
@@ -239,12 +257,37 @@ public class Game
             }
             for(Item item:items){
                 details+=item.getDescription()+",which weights "+item.getWeight()+"\n";
+                totalWeight+= item.getWeight();
             }
         }
-        details+="the total weight is "+totalWeight+"\n";
+        details+="the total weight is "+totalWeight;
         System.out.println(details);
     }
 
+    /**
+     * 展示玩家背包所有物品以及重量
+     */
+    public void printPlayerDetails(){
+        List<Item> items=player.getAllItems();
+        String details="";
+        if(items.isEmpty()){
+            details="The backpack is empty\n";
+        }
+        else{
+            int cnt= items.size();
+            if(cnt==1){
+                details="there is 1 item in the backpack\n";
+            }
+            else{
+                details="there are "+cnt+" items in the backpack\n";
+            }
+            for(Item item:items){
+                details+=item.getDescription()+",which weights "+item.getWeight()+"\n";
+            }
+        }
+        details+="the capacity of your backpack remains "+player.getCapacity();
+        System.out.println(details);
+    }
     /**
      * 添加房间到历史记录
      */
@@ -265,9 +308,8 @@ public class Game
             records.pollLast();
             num--;
         }
-        Room currentRoom= player.getCurrentRoom();
-        currentRoom=records.getLast();
-        System.out.println(currentRoom.getLongDescription());
+        player.setCurrentRoom(records.getLast());
+        System.out.println(player.getCurrentRoom().getLongDescription());
     }
 
     /**
@@ -299,7 +341,7 @@ public class Game
                 System.out.println("Your backpack is full !");
             }
             else{
-                System.out.println("You take the"+item.getDescription()+"into the backpack successfully");
+                System.out.println("You take the "+item.getDescription()+" successfully");
                 player.addItem(item);
                 currentRoom.removeItem(item.getDescription());
             }
@@ -320,6 +362,7 @@ public class Game
             System.out.println("there is no "+command.getSecondWord()+" in your backpack !");
         }
         else{
+            System.out.println("You drop the "+item.getDescription()+" successfully");
             player.removeItem(item.getDescription());
             currentRoom.addItem(item);
         }
