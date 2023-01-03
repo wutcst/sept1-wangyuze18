@@ -150,6 +150,10 @@ public class Game
                 printAllDetails();
                 break;
             }
+            case "eat cookie":{
+                eat();
+                break;
+            }
             default:{
                 break;
             }
@@ -367,4 +371,19 @@ public class Game
             currentRoom.addItem(item);
         }
     }
+
+    public void eat(){
+        Item item=player.getItem("magic cookie");
+        if(item==null){
+            System.out.println("there is no magic cookie in the backpack !");
+        }
+        else{
+            int inc=((MagicCookie)item).getEnergy();
+            player.removeItem(item.getDescription());
+            player.setCapacity(player.getCapacity()+inc);
+            System.out.println("the capacity of your backpack increases "+inc);
+            System.out.println("the capacity of your backpack is "+player.getCapacity()+" now");
+        }
+    }
+
 }
