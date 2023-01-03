@@ -18,6 +18,7 @@ import java.util.List;
 
 public class Game
 {
+
     private Parser parser;
     private LinkedList<Room> records;
     private Player player;
@@ -397,4 +398,7 @@ public class Game
         }
     }
 
+    public Player getPlayer() {
+        return player;
+    }
 }
